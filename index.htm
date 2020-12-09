@@ -23,6 +23,25 @@
         <div class="container">
             <h1 class="mt-5">Sentence Change Detection</h1>
             <p class="lead">This lets you help detect changes in a sentence.</p>
+            <form>
+                <div class="mb-3">
+                    <label for="refSentence" class="form-label">Refence Sentence</label>
+                    <textarea required class="form-control" id="refSentence"
+                        rows="3">SAUDI ARABIA denied THIS WEEK information published in the AMERICAN new york times</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="mySentence" class="form-label">My Sentence</label>
+                    <textarea required class="form-control" id="mySentence"
+                        rows="3">THIS WEEK THE SAUDIS denied information published in the new york times</textarea>
+                </div>
+                <div class="col-auto">
+                    <button type="button" id="submit" onclick="buttonClick()" class="btn btn-primary mb-3">Detect
+                        changes
+                        now!</button>
+                </div>
+            </form>
+
+            <code id="output">This is the output of the system</code>
 
         </div>
     </main>
