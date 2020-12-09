@@ -1,6 +1,7 @@
 var refSentenceValue;
 var mySentenceValue;
 var output;
+var algoReturn
 $(document).ready(function () {
     main()
 });
@@ -10,7 +11,6 @@ function main() {
 }
 
 function buttonClick() {
-    console.log("Button clicked!")
 
     // Get element values
     refSentenceElement = $("#refSentence").val()
@@ -18,20 +18,31 @@ function buttonClick() {
     output = $("#output")
 
     // Get results from the algorithm
-    var algoReturn
     algoReturn = sentenceChangeAlgo(refSentenceElement, mySentenceValue)
 
+    // ****************** WORD IN PROGRESS ************************
+
     // Split the string
-    var mySentenceValueSplitted = mySentenceValue.split()
+    var mySentenceValueSplitted = mySentenceValue.split(" ")
 
-    // Output 
-    var myOutput = "";
+    // Output HTML
+    var myOutputHTML = "Empty";
 
-    for (let i = 0; i < mySentenceValueSplitted.length; i++) {
-        myOutput = mySentenceValueSplitted[i] + " "
-    }
+    // Init Word object with empty properties
+    var myWord = new Object()
+    myWord.value = ""
+    myWord.index = -1
+    myWord.newWord = false
+    myWord.delWord = false
+    myWord.shifted = false
 
-    output.html(myOutput)
+    // Array of Words
+    var myWords = []
+
+    // ****************** WORD IN PROGRESS ************************
+    myOutputHTML = "WIP: Check console log now!"
+
+    output.html(myOutputHTML)
 
 }
 
