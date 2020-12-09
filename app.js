@@ -20,28 +20,58 @@ function buttonClick() {
     // Get results from the algorithm
     algoReturn = sentenceChangeAlgo(refSentenceElement, mySentenceValue)
 
-    // ****************** WORD IN PROGRESS ************************
-
     // Split the string
     var mySentenceValueSplitted = mySentenceValue.split(" ")
 
     // Output HTML
     var myOutputHTML = "Empty";
 
-    // Init Word object with empty properties
-    var myWord = new Object()
-    myWord.value = ""
-    myWord.index = -1
-    myWord.newWord = false
-    myWord.delWord = false
-    myWord.shifted = false
-
     // Array of Words
     var myWords = []
 
-    // ****************** WORD IN PROGRESS ************************
-    myOutputHTML = "WIP: Check console log now!"
+    myOutputHTML = ""
 
+    // Add HTML support for new, shifted and normal words
+    for (let i = 0; i < mySentenceValueSplitted.length; i++) {
+        // Init Word object with empty properties
+        var myWord = new Object()
+        myWord.value = ""
+        myWord.html = ""
+        myWord.newWord = false
+        myWord.delWord = false
+        myWord.shifted = false
+
+        var currentWord = mySentenceValueSplitted[i]
+        myWord.value = currentWord
+        if (algoReturn.newWords.includes(currentWord)) {
+            myWord.html = "<span class='new'>" + currentWord + "</span>"
+            myWord.newWord = true
+        }
+
+        else if (algoReturn.shiftedWords.includes(currentWord)) {
+            myWord.html = "<span class='shifted'>" + currentWord + "</span>"
+            myWord.shifted = true
+        }
+        else {
+            myWord.html = "<span class='normal'>" + currentWord + "</span>"
+        }
+        myWords.push(myWord)
+    }
+
+    // Add deleted words in the final string
+    // Loop through the deleted words
+    for (let i = 0; i < algoReturn.delWordsIndices.length; i++) {
+        var myWord = new Object()
+        myWord.value = algoReturn.delWords[i]
+        myWord.html = "<span class='del'>" + algoReturn.delWords[i] + "</span>"
+        myWord.delWord = true
+        myWords.splice(algoReturn.delWordsIndices[i], 0, myWord)
+
+    }
+
+    myWords.map((item) => {
+        myOutputHTML += item.html + " "
+    })
     output.html(myOutputHTML)
 
 }
@@ -140,12 +170,12 @@ function sentenceChangeAlgo(string1, string2) {
         }
     }
 
-    console.log("new words:", newWords)
-    console.log("new words indices:", newWordsIndices)
-    console.log("deleted words:", delWords)
-    console.log("deleted words indices:", delWordsIndices)
-    console.log("shifted words:", shiftedWords)
-    console.log("shifted words indices", shiftedWordsIndices)
+    // console.log("new words:", newWords)
+    // console.log("new words indices:", newWordsIndices)
+    // console.log("deleted words:", delWords)
+    // console.log("deleted words indices:", delWordsIndices)
+    // console.log("shifted words:", shiftedWords)
+    // console.log("shifted words indices", shiftedWordsIndices)
 
     var algoReturn = new Object()
     algoReturn.newWords = newWords
