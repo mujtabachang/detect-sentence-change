@@ -1,0 +1,13 @@
+.new {
+  color: green;
+}
+.del {
+  text-decoration: line-through;
+  color: red;
+}
+.shifted {
+  color: darkblue;
+}
+.normal {
+  color: gray;
+}
